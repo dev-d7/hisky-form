@@ -41,23 +41,15 @@ function fileSize(b: number) {
 }
 
 /* ── Counter ──────────────────────────────────────────── */
-const COUNTER_KEY = 'hisky_counter_v2';
-
-function readCounter(): number {
-	const today = new Date().toISOString().slice(0, 10);
-	let d = JSON.parse(localStorage.getItem(COUNTER_KEY) || '{}');
-	if (d.date !== today) {
-		d = { date: today, base: Math.floor(Math.random() * 31) + 30, actual: 0 };
-		localStorage.setItem(COUNTER_KEY, JSON.stringify(d));
-	}
-	return (d.base as number) + (d.actual as number);
-}
-
-function bumpCounter(): number {
-	const d = JSON.parse(localStorage.getItem(COUNTER_KEY) || '{}');
-	d.actual = (d.actual || 0) + 1;
-	localStorage.setItem(COUNTER_KEY, JSON.stringify(d));
-	return (d.base || 1) + d.actual;
+// Deterministic from date — identical on every device for the same day
+// Before 2 PM: base (30–60)  ·  After 2 PM: base + 20
+function getDailyCount(): number {
+  const now = new Date()
+  const today = now.toISOString().slice(0, 10)
+  let seed = 0
+  for (let i = 0; i < today.length; i++) seed += today.charCodeAt(i)
+  const base = (seed % 31) + 30
+  return now.getHours() >= 14 ? base + 20 : base
 }
 
 /* ══════════════════════════════════════════════════════ */
@@ -72,7 +64,7 @@ export default function RequirementsForm() {
 	const fileRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
-		setCounter(readCounter());
+		setCounter(getDailyCount());
 	}, []);
 
 	/* ── Field change ───────────────────────────────────── */
@@ -141,7 +133,7 @@ export default function RequirementsForm() {
 			const json = await res.json();
 			if (!res.ok) throw new Error(json.error || 'Submission failed');
 			setRefId(json.refId);
-			setCounter(bumpCounter());
+			setCounter(getDailyCount());
 			setStatus('success');
 		} catch (err) {
 			console.error(err);
@@ -165,7 +157,7 @@ export default function RequirementsForm() {
      RENDER
   ══════════════════════════════════════════════════════ */
 	return (
-		<main className='relative z-10 min-h-screen px-4 pt-6 pb-12 sm:pt-10 sm:pb-20'>
+		<main className='relative z-10 min-h-screen px-4 pt-8 pb-12 sm:pt-12 sm:pb-20'>
 			<div className='mx-auto' style={{ maxWidth: 680 }}>
 				{/* ── Compact header ───────────────────────────── */}
 				<header className='mb-5 sm:mb-6 animate-fade-down'>
@@ -183,7 +175,7 @@ export default function RequirementsForm() {
 						<div className='inline-flex items-center gap-1.5 bg-brand/15 border border-brand/30 rounded-full px-3 py-1.5 sm:px-4 animate-glow'>
 							<span className='w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brand animate-blink flex-shrink-0' />
 							<span className='text-white/90 text-[11.5px] sm:text-[13px] font-medium'>
-								<span className='text-brand font-bold'>{counter ?? '—'}</span>
+								<span className='text-brand font-bold'>{counter ?? '—'}+</span>
 								<span className='hidden sm:inline'> clients</span> submitted today
 							</span>
 						</div>

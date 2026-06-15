@@ -22,38 +22,40 @@ export default function Hero() {
     <div>
 
       {/* ══════════════════════════════════════════
-          HERO BANNER — image already has all text
+          HERO BANNER
       ══════════════════════════════════════════ */}
-      <section className="relative w-full mt-16 overflow-hidden">
-        {/* Full-width image — contains all branding already */}
+      <section className="w-full mt-16">
+        {/* Image is fully clickable — button is baked into the image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/hero.jpg"
-          alt="Hi Sky Group — Solar Trading Company"
-          className="w-full block"
-          style={{ maxHeight: 520, objectFit: 'cover', objectPosition: 'center top' }}
-        />
-
-        {/* Only overlay: CTA button + counter anchored to bottom-left */}
-        <div className="absolute bottom-5 left-5 sm:bottom-8 sm:left-10 z-10 flex flex-wrap items-center gap-3">
-          <button
-            onClick={scrollToForm}
-            className="flex items-center gap-2.5 bg-brand hover:bg-brand-dark text-white font-black text-[13px] sm:text-[15px] px-6 py-3 sm:py-3.5 rounded-xl transition-all duration-200 hover:shadow-[0_12px_32px_rgba(109,179,63,.5)] tracking-wider uppercase"
-          >
-            Send Requirement
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-            </svg>
-          </button>
-          {count !== null && (
-            <div className="flex items-center gap-2 bg-black/35 border border-white/20 backdrop-blur rounded-xl px-4 py-2.5">
-              <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
-              <span className="text-white text-[12px] sm:text-[13px]">
-                <strong className="text-brand font-bold">{count}+</strong> clients submitted today
-              </span>
-            </div>
-          )}
+        <div
+          onClick={scrollToForm}
+          className="relative cursor-pointer group block"
+        >
+          <img
+            src="/hero.jpg"
+            alt="Hi Sky Group — Solar Trading Company"
+            className="w-full block"
+          />
+          {/* Subtle hover overlay so user knows it's clickable */}
+          <div className="absolute inset-0 bg-brand/0 group-hover:bg-brand/5 transition-colors duration-200" />
         </div>
+
+        {/* Counter strip just below the image */}
+        {count !== null && (
+          <div className="bg-navy/95 flex items-center justify-center gap-3 py-2.5 px-4">
+            <span className="w-2 h-2 rounded-full bg-brand animate-pulse flex-shrink-0" />
+            <span className="text-white/90 text-[13px] sm:text-[14px] font-medium">
+              <strong className="text-brand font-bold text-[15px]">{count}+</strong>{' '}
+              clients submitted their requirements today
+            </span>
+            <button
+              onClick={scrollToForm}
+              className="ml-3 bg-brand hover:bg-brand-dark text-white font-bold text-[12px] px-4 py-1.5 rounded-lg transition-colors tracking-wide uppercase flex-shrink-0"
+            >
+              Submit Yours →
+            </button>
+          </div>
+        )}
       </section>
 
       {/* ══════════════════════════════════════════

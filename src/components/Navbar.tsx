@@ -1,16 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   const scrollTo = (id: string) => {
     setMenuOpen(false)
@@ -18,81 +11,80 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-navy/95 backdrop-blur shadow-lg' : 'bg-transparent'
-    }`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16 sm:h-18">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-[64px]">
 
           {/* Logo */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand to-brand-dark flex items-center justify-center text-base">
-              ☀️
-            </div>
-            <div>
-              <div className="text-white font-black text-[15px] sm:text-[17px] tracking-wide leading-none">
-                HI <span className="text-brand">SKY</span> GROUP
+          <div className="flex items-center gap-2.5 flex-shrink-0">
+            {/* Bird SVG logo */}
+            <svg width="38" height="38" viewBox="0 0 60 60" fill="none">
+              <path d="M10 35 Q20 10 50 15 Q35 25 32 40 Q28 28 10 35Z" fill="#1B2B5E"/>
+              <path d="M32 40 Q36 20 55 18 Q45 30 38 45Z" fill="#6DB33F"/>
+            </svg>
+            <div className="leading-none">
+              <div className="text-navy font-black text-[18px] sm:text-[20px] tracking-wide leading-none">
+                HI <span className="text-brand">SKY</span>
               </div>
-              <div className="text-brand/70 text-[9px] sm:text-[10px] tracking-[2px] font-medium">— Let's fly —</div>
+              <div className="text-brand text-[9px] sm:text-[10px] tracking-[2.5px] font-semibold italic leading-none mt-0.5">
+                — Let's fly —
+              </div>
             </div>
           </div>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6">
-            {['Home', 'About Us', 'Products', 'Contact Us'].map(item => (
+          <div className="hidden md:flex items-center gap-1">
+            {[
+              { label: 'HOME',             id: '' },
+              { label: 'ABOUT US',         id: '' },
+              { label: 'PRODUCTS',         id: '' },
+              { label: 'SEND REQUIREMENT', id: 'send-requirement' },
+              { label: 'CONTACT US',       id: '' },
+            ].map(({ label, id }) => (
               <button
-                key={item}
-                className="text-white/75 hover:text-white text-[13.5px] font-medium transition-colors"
+                key={label}
+                onClick={() => id && scrollTo(id)}
+                className={`px-3 py-1.5 text-[12px] font-semibold tracking-wide transition-colors
+                  ${label === 'HOME'
+                    ? 'text-brand border-b-2 border-brand'
+                    : label === 'SEND REQUIREMENT'
+                      ? 'text-navy hover:text-brand'
+                      : 'text-gray-600 hover:text-navy'
+                  }`}
               >
-                {item}
+                {label}
               </button>
             ))}
-            <button
-              onClick={() => scrollTo('send-requirement')}
-              className="text-[13.5px] font-semibold text-navy bg-brand hover:bg-brand-dark px-4 py-2 rounded-lg transition-colors"
-            >
-              Send Requirement
-            </button>
+          </div>
+
+          {/* WhatsApp CTA */}
+          <div className="hidden md:flex items-center">
             <a
               href="https://wa.me/919625190691"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 bg-[#25D366] hover:bg-[#20bf5b] text-white text-[13px] font-semibold px-4 py-2 rounded-lg transition-colors"
+              target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20bf5b] text-white font-bold text-[13px] px-5 py-2.5 rounded-lg transition-colors shadow-sm"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.554 4.107 1.523 5.837L.057 23.882l6.195-1.438A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.374l-.36-.213-3.677.853.92-3.562-.234-.374A9.818 9.818 0 0112 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.421-4.398 9.818-9.818 9.818z"/>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.118.554 4.107 1.523 5.837L.057 23.882l6.195-1.438A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.374l-.36-.213-3.677.853.92-3.562-.234-.374A9.818 9.818 0 0112 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.421-4.398 9.818-9.818 9.818z"/>
               </svg>
-              WhatsApp
+              Chat on WhatsApp
             </a>
           </div>
 
-          {/* Mobile: WhatsApp + hamburger */}
+          {/* Mobile */}
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => scrollTo('send-requirement')}
-              className="text-[12px] font-semibold text-navy bg-brand px-3 py-1.5 rounded-lg"
+              className="text-[11px] font-bold text-white bg-brand px-3 py-1.5 rounded-lg"
             >
-              Send Requirement
+              Send Req
             </button>
-            <button
-              onClick={() => setMenuOpen(p => !p)}
-              className="text-white p-1.5"
-              aria-label="Menu"
-            >
-              <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                {menuOpen ? (
-                  <>
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </>
-                ) : (
-                  <>
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <line x1="3" y1="12" x2="21" y2="12" />
-                    <line x1="3" y1="18" x2="21" y2="18" />
-                  </>
-                )}
+            <button onClick={() => setMenuOpen(p => !p)} className="text-navy p-1">
+              <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                {menuOpen
+                  ? <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>
+                  : <><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></>
+                }
               </svg>
             </button>
           </div>
@@ -100,21 +92,17 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden bg-navy/98 border-t border-white/10 py-3 space-y-1">
-            {['Home', 'About Us', 'Products', 'Contact Us'].map(item => (
-              <button
-                key={item}
-                className="block w-full text-left px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/5 text-[14px]"
-              >
+          <div className="md:hidden border-t border-gray-100 py-3 space-y-1 bg-white">
+            {['HOME', 'ABOUT US', 'PRODUCTS', 'CONTACT US'].map(item => (
+              <button key={item} className="block w-full text-left px-4 py-2.5 text-gray-600 hover:text-navy text-[13px] font-medium">
                 {item}
               </button>
             ))}
-            <div className="px-4 pt-2 pb-1">
+            <div className="px-4 pt-2">
               <a
                 href="https://wa.me/919625190691"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-[#25D366] text-white text-[14px] font-semibold px-4 py-2.5 rounded-lg"
+                target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold text-[13px] px-4 py-2.5 rounded-lg"
               >
                 Chat on WhatsApp
               </a>

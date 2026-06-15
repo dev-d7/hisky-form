@@ -66,7 +66,7 @@ export default function Hero() {
           {[
             { n: '1', name: 'MODULES & PANELS',           desc: 'High Efficiency Solar Modules',      img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=300&q=80', badge: '⚡' },
             { n: '2', name: 'BOS ITEMS (BALANCE OF SYS)', desc: 'Complete Range of BOS Items',        img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=80', badge: '⚙️' },
-            { n: '3', name: 'INVERTERS',                  desc: 'High Performance Solar Inverters',   img: 'https://images.unsplash.com/photo-1620714223084-8fcacc2dfd4d?w=300&q=80', badge: '🔋' },
+            { n: '3', name: 'INVERTERS',                  desc: 'High Performance Solar Inverters',   img: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=300&q=80', badge: '🔋' },
           ].map(p => (
             <div key={p.n} className="flex bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
               <div className="relative flex-shrink-0 w-[110px]">

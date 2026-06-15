@@ -22,116 +22,37 @@ export default function Hero() {
     <div>
 
       {/* ══════════════════════════════════════════
-          HERO BANNER — landscape banner height
+          HERO BANNER — image already has all text
       ══════════════════════════════════════════ */}
-      <section
-        className="relative w-full overflow-hidden mt-16"
-        style={{ minHeight: 440 }}
-      >
-        {/* Background photo */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url('/hero.jpg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 40%',
-          }}
+      <section className="relative w-full mt-16 overflow-hidden">
+        {/* Full-width image — contains all branding already */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/hero.jpg"
+          alt="Hi Sky Group — Solar Trading Company"
+          className="w-full block"
+          style={{ maxHeight: 520, objectFit: 'cover', objectPosition: 'center top' }}
         />
 
-        {/* LEFT dark angled panel */}
-        <div
-          className="absolute top-0 left-0 h-full z-10 flex flex-col justify-start pt-6 pl-5 pr-10"
-          style={{
-            background: 'linear-gradient(180deg,#0b1527 0%,#0b1527 100%)',
-            clipPath: 'polygon(0 0, 78% 0, 58% 100%, 0 100%)',
-            minWidth: 190,
-          }}
-        >
-          <div className="text-3xl mb-2">☀️</div>
-          <p className="text-white font-bold text-[13px] tracking-widest leading-tight uppercase">Power Today</p>
-          <p className="text-brand font-black text-[15px] tracking-widest leading-tight uppercase">Greener</p>
-          <p className="text-white font-bold text-[13px] tracking-widest leading-tight uppercase">Tomorrow</p>
-        </div>
-
-        {/* CENTER branding */}
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4">
-          {/* Bird SVG — line art origami style */}
-          <svg width="72" height="58" viewBox="0 0 90 72" fill="none" className="mb-1 drop-shadow">
-            <path d="M20 55 Q35 10 75 18 Q52 32 48 58 Q42 36 20 55Z" fill="none" stroke="#1B2B5E" strokeWidth="2.5" strokeLinejoin="round"/>
-            <path d="M48 58 Q56 28 78 22 Q66 40 58 64Z" fill="none" stroke="#1B2B5E" strokeWidth="2.5" strokeLinejoin="round"/>
-            <path d="M48 30 L62 14 L70 22" fill="none" stroke="#1B2B5E" strokeWidth="2" strokeLinejoin="round"/>
-          </svg>
-
-          <h1
-            className="font-black text-navy leading-none tracking-tight"
-            style={{ fontSize: 'clamp(56px, 8vw, 108px)', textShadow: '0 2px 12px rgba(255,255,255,0.3)' }}
+        {/* Only overlay: CTA button + counter anchored to bottom-left */}
+        <div className="absolute bottom-5 left-5 sm:bottom-8 sm:left-10 z-10 flex flex-wrap items-center gap-3">
+          <button
+            onClick={scrollToForm}
+            className="flex items-center gap-2.5 bg-brand hover:bg-brand-dark text-white font-black text-[13px] sm:text-[15px] px-6 py-3 sm:py-3.5 rounded-xl transition-all duration-200 hover:shadow-[0_12px_32px_rgba(109,179,63,.5)] tracking-wider uppercase"
           >
-            HI&nbsp;&nbsp;SKY
-          </h1>
-
-          <p className="text-brand font-bold italic tracking-[5px] text-[15px] sm:text-[19px] mt-1.5">
-            — &nbsp;Let&apos;s fly &nbsp;—
-          </p>
-
-          <div className="flex items-center gap-3 mt-1">
-            <div className="h-px w-10 bg-navy/50" />
-            <p className="text-navy font-semibold text-[10px] sm:text-[12px] tracking-[4px] uppercase">
-              Solar Trading Company
-            </p>
-            <div className="h-px w-10 bg-navy/50" />
-          </div>
-        </div>
-
-        {/* RIGHT badge cards */}
-        <div className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2">
-          {[
-            { icon: '🔆', line1: 'PREMIUM',      line2: 'SOLAR PRODUCTS' },
-            { icon: '✅', line1: '100%',          line2: 'GENUINE & RELIABLE' },
-            { icon: '🤝', line1: 'TRUSTED BY',   line2: 'PROFESSIONALS,\nCHOSEN BY ALL' },
-          ].map(b => (
-            <div key={b.line1} className="flex items-center gap-2.5 bg-white/92 backdrop-blur-sm rounded-xl px-3.5 py-2.5 shadow-lg min-w-[160px]">
-              <span className="text-2xl flex-shrink-0">{b.icon}</span>
-              <div>
-                <p className="text-navy font-black text-[10.5px] leading-tight tracking-wide uppercase">{b.line1}</p>
-                <p className="text-navy font-black text-[10.5px] leading-tight tracking-wide uppercase whitespace-pre-line">{b.line2}</p>
-              </div>
+            Send Requirement
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+          {count !== null && (
+            <div className="flex items-center gap-2 bg-black/35 border border-white/20 backdrop-blur rounded-xl px-4 py-2.5">
+              <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
+              <span className="text-white text-[12px] sm:text-[13px]">
+                <strong className="text-brand font-bold">{count}+</strong> clients submitted today
+              </span>
             </div>
-          ))}
-        </div>
-
-        {/* BOTTOM-LEFT tagline + CTA */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-10 px-6 sm:px-10 py-6"
-          style={{ background: 'linear-gradient(to top, rgba(5,10,22,0.78) 0%, transparent 100%)' }}
-        >
-          <p className="text-white font-black leading-tight drop-shadow-lg" style={{ fontSize: 'clamp(20px, 3.2vw, 38px)' }}>
-            STRONG PRODUCTS.
-          </p>
-          <p className="text-brand font-black leading-tight drop-shadow-lg" style={{ fontSize: 'clamp(20px, 3.2vw, 38px)' }}>
-            STRONGER FUTURE.
-          </p>
-          <p className="text-white/75 text-[13px] sm:text-[15px] mt-1 mb-4">
-            One Stop Solution for All Your Solar Needs
-          </p>
-          <div className="flex flex-wrap items-center gap-3">
-            <button
-              onClick={scrollToForm}
-              className="flex items-center gap-2.5 bg-brand hover:bg-brand-dark text-white font-black text-[13px] sm:text-[14px] px-6 py-3 rounded-xl transition-all duration-200 hover:shadow-[0_12px_32px_rgba(109,179,63,.5)] tracking-wider uppercase"
-            >
-              Send Requirement
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-              </svg>
-            </button>
-            {count !== null && (
-              <div className="flex items-center gap-2 bg-black/25 border border-white/20 backdrop-blur rounded-xl px-4 py-2.5">
-                <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
-                <span className="text-white text-[12px] sm:text-[13px]">
-                  <strong className="text-brand font-bold">{count}+</strong> clients submitted today
-                </span>
-              </div>
-            )}
-          </div>
+          )}
         </div>
       </section>
 

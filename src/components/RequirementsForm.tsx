@@ -163,13 +163,9 @@ export default function RequirementsForm() {
 				<header className='mb-5 sm:mb-6 animate-fade-down'>
 					{/* Logo + counter on one row */}
 					<div className='flex items-center justify-between mb-4 sm:mb-5'>
-						<div className='inline-flex items-center gap-2 bg-white/8 border border-white/15 rounded-full px-3.5 py-1.5 backdrop-blur'>
-							<div className='w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-gradient-to-br from-brand to-navy flex items-center justify-center text-[11px] sm:text-xs'>
-								☀️
-							</div>
-							<span className='text-[12.5px] sm:text-[14px] font-extrabold tracking-wide text-white'>
-								HI <span className='text-brand'>SKY</span> GROUP
-							</span>
+						<div className='inline-flex items-center bg-white/95 border border-white/30 rounded-xl px-3 py-1.5 backdrop-blur shadow-sm'>
+							{/* eslint-disable-next-line @next/next/no-img-element */}
+							<img src='/logo.png' alt='Hi Sky Group' className='h-8 sm:h-10 w-auto object-contain' />
 						</div>
 
 						<div className='inline-flex items-center gap-1.5 bg-brand/15 border border-brand/30 rounded-full px-3 py-1.5 sm:px-4 animate-glow'>

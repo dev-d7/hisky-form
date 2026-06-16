@@ -414,6 +414,7 @@ export default function RequirementsForm() {
 									{ tel: '+919625190691', num: '+91 96251 90691', mail: 'purchase@hiskygroup.com' },
 									{ tel: '+919716702915', num: '+91 97167 02915', mail: 'sales@hiskygroup.com' },
 									{ tel: '+919958750086', num: '+91 99587 50086', mail: 'info@hiskygroup.com' },
+									{ tel: '+918383058699', num: '+91 83830 58699', mail: 'marketing@hiskygroup.com' },
 								].map(({ tel, num, mail }) => (
 									<div key={tel} className='flex items-center gap-3 text-[12px]'>
 										<span className='text-gray-400 text-[10px] w-3'>📞</span>

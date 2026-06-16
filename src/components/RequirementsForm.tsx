@@ -408,18 +408,21 @@ export default function RequirementsForm() {
 					{/* Card footer */}
 					<div className='flex items-center justify-between gap-3 flex-wrap px-5 py-3 sm:px-8 sm:py-4 bg-gray-50 border-t border-gray-100'>
 						<div>
-							<p className='text-gray-400 text-[11px] font-medium uppercase tracking-wide mb-1'>Need help?</p>
-							{[
-								{ tel: '+919625190691', num: '+91 96251 90691', mail: 'purchase@hiskygroup.com' },
-								{ tel: '+919716702915', num: '9716702915',      mail: 'sales@hiskygroup.com' },
-								{ tel: '+919958750086', num: '9958750086',      mail: 'info@hiskygroup.com' },
-							].map(({ tel, num, mail }) => (
-								<div key={tel} className='flex items-center gap-2 text-[12px] mt-1'>
-									<a href={`tel:${tel}`} className='text-brand hover:underline font-semibold'>{num}</a>
-									<span className='text-gray-300'>|</span>
-									<a href={`mailto:${mail}`} className='text-brand hover:underline font-semibold'>{mail}</a>
-								</div>
-							))}
+							<p className='text-gray-400 text-[11px] font-semibold uppercase tracking-widest mb-2'>Need help?</p>
+							<div className='space-y-1.5'>
+								{[
+									{ tel: '+919625190691', num: '+91 96251 90691', mail: 'purchase@hiskygroup.com' },
+									{ tel: '+919716702915', num: '+91 97167 02915', mail: 'sales@hiskygroup.com' },
+									{ tel: '+919958750086', num: '+91 99587 50086', mail: 'info@hiskygroup.com' },
+								].map(({ tel, num, mail }) => (
+									<div key={tel} className='flex items-center gap-3 text-[12px]'>
+										<span className='text-gray-400 text-[10px] w-3'>📞</span>
+										<a href={`tel:${tel}`} className='text-navy font-bold hover:text-brand transition-colors w-[118px]'>{num}</a>
+										<span className='text-gray-300 text-[10px]'>✉</span>
+										<a href={`mailto:${mail}`} className='text-brand hover:underline font-medium'>{mail}</a>
+									</div>
+								))}
+							</div>
 							<p className='text-gray-400 text-[11px] mt-1'>
 								📍 A-1508, ATS Bouquet, Plot No A-2/2, Sector 132, Noida (UP) - 201301
 							</p>

@@ -44,12 +44,29 @@ function fileSize(b: number) {
 // Deterministic from date — identical on every device for the same day
 // Before 2 PM: base (30–60)  ·  After 2 PM: base + 20
 function getDailyCount(): number {
-  const now = new Date()
+  const now  = new Date()
+  const hour = now.getHours()
+
+  if (hour < 10) return 0
+
   const today = now.toISOString().slice(0, 10)
-  let seed = 0
-  for (let i = 0; i < today.length; i++) seed += today.charCodeAt(i)
-  const base = (seed % 31) + 30
-  return now.getHours() >= 14 ? base + 20 : base
+
+  function h(salt: string) {
+    let n = 0
+    const s = today + salt
+    for (let i = 0; i < s.length; i++) n += s.charCodeAt(i)
+    return n
+  }
+
+  const base = (h('base') % 6) + 10
+  const inc1 = (h('inc1') % 6) + 5
+  const inc2 = (h('inc2') % 6) + 5
+  const inc3 = (h('inc3') % 6) + 5
+
+  if (hour < 13) return base
+  if (hour < 16) return base + inc1
+  if (hour < 19) return base + inc1 + inc2
+  return base + inc1 + inc2 + inc3
 }
 
 /* ══════════════════════════════════════════════════════ */

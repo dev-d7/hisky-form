@@ -6,12 +6,31 @@ const scrollToForm = () =>
   document.getElementById('send-requirement')?.scrollIntoView({ behavior: 'smooth' })
 
 function getDailyCount() {
-  const now   = new Date()
+  const now  = new Date()
+  const hour = now.getHours()
+
+  // Before 10 AM or midnight reset window
+  if (hour < 10) return 0
+
   const today = now.toISOString().slice(0, 10)
-  let seed = 0
-  for (let i = 0; i < today.length; i++) seed += today.charCodeAt(i)
-  const base = (seed % 31) + 30
-  return now.getHours() >= 14 ? base + 20 : base
+
+  // Deterministic seed per day per slot — same value on every device
+  function h(salt: string) {
+    let n = 0
+    const s = today + salt
+    for (let i = 0; i < s.length; i++) n += s.charCodeAt(i)
+    return n
+  }
+
+  const base = (h('base') % 6) + 10   // 10–15 at 10 AM
+  const inc1 = (h('inc1') % 6) + 5    //  5–10 at  1 PM
+  const inc2 = (h('inc2') % 6) + 5    //  5–10 at  4 PM
+  const inc3 = (h('inc3') % 6) + 5    //  5–10 at  7 PM
+
+  if (hour < 13) return base
+  if (hour < 16) return base + inc1
+  if (hour < 19) return base + inc1 + inc2
+  return base + inc1 + inc2 + inc3     // 7 PM → midnight
 }
 
 export default function Hero() {

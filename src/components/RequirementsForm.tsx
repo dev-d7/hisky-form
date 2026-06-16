@@ -411,16 +411,21 @@ export default function RequirementsForm() {
 
 					{/* Card footer */}
 					<div className='flex items-center justify-between gap-3 flex-wrap px-5 py-3 sm:px-8 sm:py-4 bg-gray-50 border-t border-gray-100'>
-						<p className='text-gray-500 text-[12px]'>
-							Need help? &nbsp;
-							<a href='tel:+919625190691' className='text-brand hover:underline font-semibold'>
-								+91 96251 90691
-							</a>
-							&nbsp;|&nbsp;
-							<a href='mailto:purchase@hiskygroup.com' className='text-brand hover:underline font-semibold'>
-								purchase@hiskygroup.com
-							</a>
-						</p>
+						<div>
+							<p className='text-gray-500 text-[12px]'>
+								Need help? &nbsp;
+								<a href='tel:+919625190691' className='text-brand hover:underline font-semibold'>
+									+91 96251 90691
+								</a>
+								&nbsp;|&nbsp;
+								<a href='mailto:purchase@hiskygroup.com' className='text-brand hover:underline font-semibold'>
+									purchase@hiskygroup.com
+								</a>
+							</p>
+							<p className='text-gray-400 text-[11px] mt-1'>
+								📍 A-1508, ATS Bouquet, Plot No A-2/2, Sector 132, Noida (UP) - 201301
+							</p>
+						</div>
 						<p className='text-gray-400 text-[12px]'>🔐 256-bit Encrypted</p>
 					</div>
 				</div>

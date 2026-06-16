@@ -423,6 +423,24 @@ export default function RequirementsForm() {
 									purchase@hiskygroup.com
 								</a>
 							</p>
+							<p className='text-gray-500 text-[12px] mt-0.5'>
+								<a href='tel:+919716702915' className='text-brand hover:underline font-semibold'>
+									9716702915
+								</a>
+								&nbsp;|&nbsp;
+								<a href='mailto:sales@hiskygroup.com' className='text-brand hover:underline font-semibold'>
+									sales@hiskygroup.com
+								</a>
+							</p>
+							<p className='text-gray-500 text-[12px] mt-0.5'>
+								<a href='tel:+919958750086' className='text-brand hover:underline font-semibold'>
+									9958750086
+								</a>
+								&nbsp;|&nbsp;
+								<a href='mailto:info@hiskygroup.com' className='text-brand hover:underline font-semibold'>
+									info@hiskygroup.com
+								</a>
+							</p>
 							<p className='text-gray-400 text-[11px] mt-1'>
 								📍 A-1508, ATS Bouquet, Plot No A-2/2, Sector 132, Noida (UP) - 201301
 							</p>

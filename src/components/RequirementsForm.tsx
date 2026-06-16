@@ -408,34 +408,18 @@ export default function RequirementsForm() {
 					{/* Card footer */}
 					<div className='flex items-center justify-between gap-3 flex-wrap px-5 py-3 sm:px-8 sm:py-4 bg-gray-50 border-t border-gray-100'>
 						<div>
-							<p className='text-gray-500 text-[12px]'>
-								Need help? &nbsp;
-								<a href='tel:+919625190691' className='text-brand hover:underline font-semibold'>
-									+91 96251 90691
-								</a>
-								&nbsp;|&nbsp;
-								<a href='mailto:purchase@hiskygroup.com' className='text-brand hover:underline font-semibold'>
-									purchase@hiskygroup.com
-								</a>
-							</p>
-							<p className='text-gray-500 text-[12px] mt-0.5'>
-								<a href='tel:+919716702915' className='text-brand hover:underline font-semibold'>
-									9716702915
-								</a>
-								&nbsp;|&nbsp;
-								<a href='mailto:sales@hiskygroup.com' className='text-brand hover:underline font-semibold'>
-									sales@hiskygroup.com
-								</a>
-							</p>
-							<p className='text-gray-500 text-[12px] mt-0.5'>
-								<a href='tel:+919958750086' className='text-brand hover:underline font-semibold'>
-									9958750086
-								</a>
-								&nbsp;|&nbsp;
-								<a href='mailto:info@hiskygroup.com' className='text-brand hover:underline font-semibold'>
-									info@hiskygroup.com
-								</a>
-							</p>
+							<p className='text-gray-400 text-[11px] font-medium uppercase tracking-wide mb-1'>Need help?</p>
+							{[
+								{ tel: '+919625190691', num: '+91 96251 90691', mail: 'purchase@hiskygroup.com' },
+								{ tel: '+919716702915', num: '9716702915',      mail: 'sales@hiskygroup.com' },
+								{ tel: '+919958750086', num: '9958750086',      mail: 'info@hiskygroup.com' },
+							].map(({ tel, num, mail }) => (
+								<div key={tel} className='flex items-center gap-2 text-[12px] mt-1'>
+									<a href={`tel:${tel}`} className='text-brand hover:underline font-semibold'>{num}</a>
+									<span className='text-gray-300'>|</span>
+									<a href={`mailto:${mail}`} className='text-brand hover:underline font-semibold'>{mail}</a>
+								</div>
+							))}
 							<p className='text-gray-400 text-[11px] mt-1'>
 								📍 A-1508, ATS Bouquet, Plot No A-2/2, Sector 132, Noida (UP) - 201301
 							</p>

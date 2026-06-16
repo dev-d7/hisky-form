@@ -16,20 +16,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-[64px]">
 
           {/* Logo */}
-          <div className="flex items-center gap-2.5 flex-shrink-0">
-            {/* Bird SVG logo */}
-            <svg width="38" height="38" viewBox="0 0 60 60" fill="none">
-              <path d="M10 35 Q20 10 50 15 Q35 25 32 40 Q28 28 10 35Z" fill="#1B2B5E"/>
-              <path d="M32 40 Q36 20 55 18 Q45 30 38 45Z" fill="#6DB33F"/>
-            </svg>
-            <div className="leading-none">
-              <div className="text-navy font-black text-[18px] sm:text-[20px] tracking-wide leading-none">
-                HI <span className="text-brand">SKY</span>
-              </div>
-              <div className="text-brand text-[9px] sm:text-[10px] tracking-[2.5px] font-semibold italic leading-none mt-0.5">
-                — Let's fly —
-              </div>
-            </div>
+          <div className="flex items-center flex-shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Hi Sky Group" className="h-12 sm:h-14 w-auto object-contain" />
           </div>
 
           {/* Desktop nav */}
